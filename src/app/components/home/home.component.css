@@ -1,0 +1,37 @@
+.home-page{
+  min-height: 400px;
+  min-width: 900px ;
+  display: flex;
+  justify-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: white;
+}
+.home-page-posts{
+  display: flex;
+  flex-direction: column;
+}
+.home-page-posts-content{
+  min-height: 400px;
+  min-width: 800px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 20px 10px 10px 60px;
+}
+.home-page-black{
+  min-height: 400px;
+  min-width: 900px ;
+  display: flex;
+  justify-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: black;
+  color: white;
+}
+

@@ -1,0 +1,77 @@
+.movie-detail {
+  width: 900px;
+  min-height: 900px;
+  background-color: black;
+  margin: 20px 10px 10px 200px;
+  border-radius: 2%;
+}
+
+.movie-detail-content {
+  text-align: right;
+  margin: 10px 10px 10px 10px;
+  color: white;
+}
+
+.movie-detail-content-overview {
+  text-align: center;
+  color: white;
+  margin: 40px 10px 10px 10px;
+}
+
+.movie-detail-actors {
+  margin: 0 auto;
+  width: 800px;
+}
+
+.movie-detail-actor-content {
+  display: flex;
+  justify-content: start;
+  overflow-x: scroll;
+}
+
+.movie-detail-content-open {
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
+  min-height: 40px;
+}
+
+.movie-detail-content-open:hover {
+  color: gray;
+}
+
+.movie-detail-content-open-comment {
+  color: black;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.movie-detail-content-open-comment:hover {
+  color: gray;
+}
+
+.movie-page-black {
+  min-height: 400px;
+  min-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: black;
+  color: white;
+}
+
+.movie-page {
+  min-height: 400px;
+  min-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: white;
+}
+
+.episode-actor-content {
+  display: flex;
+  justify-content: start;
+  overflow-x: scroll;
+}

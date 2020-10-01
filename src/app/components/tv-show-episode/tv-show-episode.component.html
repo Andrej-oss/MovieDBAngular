@@ -1,0 +1,74 @@
+<div [class]="this.dataThemeService.data.value.darkTheme ? blackPage : whitePage">
+  <div *ngIf="!dataThemeService.data.value.isTvSeasonsLoading">
+    <div class="spinner-border" role="status" style="margin: 200px 0% 0% 50%">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="dataThemeService.data.value.isTvSeasonsLoading">
+    <div class="movie-detail">
+      <div *ngFor="let episode of episode$ | async">
+        <div class="movie-detail-background">
+          <a *ngIf="!episode.still_path">
+            <img src="../../../assets/kino2.jpg" style="width: 400px; height: 300px; border-radius: 10px; margin: 150px"/>
+          </a>
+          <a *ngIf="episode.still_path">
+            <div class="movie-detail-poster">
+              <img src="https://image.tmdb.org/t/p/w500{{episode.still_path}}" style="border-radius: 10px; margin: 10px; width: 800"/>
+            </div>
+          </a>
+        </div>
+        <div class="movie-detail-content">
+          <h2>{{episode.name}}({{episode.air_date}})</h2>
+          <div class="movie-detail-content-block">
+            <div>
+              <mat-icon>stars</mat-icon>
+              {{episode.vote_average}}({{episode.vote_count}})
+            </div>
+            <h3>Season: {{episode.season_number}}</h3>
+            <h3>Episode: {{episode.episode_number}}</h3>
+            <a>First in air: {{episode.air_date}}</a>
+              <br/>
+
+        <div class="movie-detail-content-overview">
+          <h3>Overview</h3>
+          <br/>
+          {{episode.overview}}
+        </div>
+          </div>
+        </div>
+        <div (click)="showTrailers()" class="movie-detail-content-open">
+          <a *ngIf="!isTrailerOpen" >Show Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <a *ngIf="isTrailerOpen" >Hide Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <div *ngIf="isTrailerOpen === true">
+            <div *ngFor="let trailer of trailers$ | async">
+              <a *ngIf="trailer.size">
+                <youtube-player [videoId]="trailer.key"></youtube-player>
+              </a>
+              <a *ngIf="!trailer.size">
+                No Trailers Yet!!!
+              </a>
+      </div>
+    </div>
+  </div>
+        <h2 style="color: white">Guest Stars</h2>
+        <div class="episode-actor-content" style="color: white">
+          <app-actors *ngFor="let actor of episode.guest_stars" [actor]="actor"></app-actors>
+        </div>
+</div>
+  </div>
+    <div class="movie-detail-actors">
+      <h2>Actors</h2>
+      <div class="movie-detail-actor-content">
+        <app-actors *ngFor="let actor of actors$ | async" [actor]="actor"></app-actors>
+      </div>
+      <h2>Crew</h2>
+      <div class="movie-detail-actor-content">
+        <app-crew *ngFor="let person of crew$ | async" [person]="person"></app-crew>
+      </div>
+    </div>
+</div>
+</div>
