@@ -1,0 +1,81 @@
+.season-detail {
+  width: 900px;
+  min-height: 900px;
+  background-color: black;
+  margin: 20px 10px 10px 200px;
+  border-radius: 2%;
+}
+
+.season-detail-background {
+  width: 900px;
+  background-color: black;
+  border-radius: 2%;
+  background-repeat: no-repeat;
+  background-size: 1000px 400px;
+  height: 350px;
+  color: white;
+}
+
+.season-detail-content {
+  text-align: right;
+  margin: 10px 10px 10px 10px;
+  color: white;
+}
+
+.season-detail-content-overview {
+  text-align: center;
+  color: white;
+  margin: 40px 10px 10px 10px;
+}
+
+.season-detail-actors {
+  margin: 0 auto;
+  width: 800px;
+}
+
+.season-detail-actor-content {
+  display: flex;
+  justify-content: start;
+  overflow-x: scroll;
+}
+
+.season-detail-content-open {
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
+  min-height: 40px;
+}
+
+.season-detail-content-open:hover {
+  color: gray;
+}
+
+.season-detail-content-open-comment {
+  color: black;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.season-detail-content-open-comment:hover {
+  color: gray;
+}
+
+.season-page-black {
+  min-height: 400px;
+  min-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: black;
+  color: white;
+}
+
+.season-page {
+  min-height: 400px;
+  min-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: white;
+}

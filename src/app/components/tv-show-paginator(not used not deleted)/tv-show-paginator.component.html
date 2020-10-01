@@ -1,0 +1,57 @@
+<nav aria-label="Page navigation example" style="margin-left: 25%">
+  <ul class="pagination">
+    <li class="page-item" type="button" (click)="onPrevious()">
+      <a class="page-link">Previous</a>
+    </li>
+    <a *ngFor="let page of paginator">
+      <a *ngIf="page.id <= lastPage">
+        <a *ngIf="dataThemeService.data.value.paginator === 'tvShowPaginator'">
+          <li type="button" routerLink="/tv_shows/{{sortOption}}/{{page.id}}"
+              (click)="onGetMovies(sortOption, page.id)">
+            <a *ngIf="activePage === page.id">
+              <a class="page-link" type="button" style="background-color: gray; color: blanchedalmond">{{activePage}}
+              </a>
+            </a>
+            <a *ngIf="activePage !== page.id">
+              <a class="page-link" type="button">{{page.id}}
+              </a>
+            </a>
+          </li>
+        </a>
+        <a *ngIf="dataThemeService.data.value.paginator === 'actorPaginator'">
+          <a *ngIf="dataThemeService.data.value.actorSearch === ''">
+            <li type="button" routerLink="/actors/{{page.id}}" (click)="onGetMovies(sortOption, page.id)">
+              <a *ngIf="activePage === page.id">
+                <a class="page-link" type="button" style="background-color: gray; color: blanchedalmond">{{activePage}}
+                </a>
+              </a>
+              <a *ngIf="activePage !== page.id">
+                <a class="page-link" type="button">{{page.id}}
+                </a>
+              </a>
+            </li>
+          </a>
+          <a *ngIf="dataThemeService.data.value.actorSearch.length > 1">
+            <li type="button"
+                routerLink="/actors/{{dataThemeService.data.value.actorSearch}}/{{page.id}}"
+                (click)="onGetMovies(sortOption, page.id)">
+              <a *ngIf="activePage === page.id">
+                <a class="page-link" type="button" style="background-color: gray; color: blanchedalmond">{{activePage}}
+                </a>
+              </a>
+              <a *ngIf="activePage !== page.id">
+                <a class="page-link" type="button">{{page.id}}
+                </a>
+              </a>
+            </li>
+          </a>
+        </a>
+      </a>
+    </a>
+    <li class="page-item" type="button" (click)="onNext( )">
+      <a class="page-link">Next</a>
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
+

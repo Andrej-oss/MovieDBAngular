@@ -1,0 +1,20 @@
+.movie-post {
+  margin: 10px 10px 10px 10px;
+  display: block;
+  flex-direction: row;
+  min-height: 450px;
+  color: grey;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  background-color: lightgrey;
+}
+
+.movie-post-tittle {
+  text-align: center;
+}
+
+.movie-post:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px;
+}

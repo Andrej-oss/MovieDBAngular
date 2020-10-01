@@ -1,0 +1,17 @@
+<div class="actor-card" routerLink="/crew/{{person.id}}" (click)="getBiography(person.id)">
+  <div class="actor-card-poster">
+    <a *ngIf="!person.profile_path">
+      <img src="../../../assets/awaiting-profile.jpg" style="width: 100px; border-radius: 50%"/>
+    </a>
+    <a *ngIf="person.profile_path">
+      <img src="https://image.tmdb.org/t/p/w200{{person.profile_path}}" style="width: 100px; border-radius: 50%"/>
+    </a>
+    <div class="actor-card-poster-name">
+      {{person.name}}
+    </div>
+    <div>{{person.job}}</div>
+    <br/>
+    <div>{{person.department}}</div>
+  </div>
+</div>
+<router-outlet></router-outlet>

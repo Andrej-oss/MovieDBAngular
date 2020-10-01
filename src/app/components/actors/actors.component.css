@@ -1,0 +1,13 @@
+.actor-card{
+  margin: 5px 5px 5px 5px;
+  min-height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+}
+.actor-card-poster{
+  margin: 5px 2px 2px 2px;
+}
+.actor-card-poster-name{
+  margin: 2px 2px 2px 2px;
+  font-weight: bold;
+}

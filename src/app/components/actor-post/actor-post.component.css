@@ -1,0 +1,25 @@
+.actor-post {
+  margin: 10px 10px 10px 10px;
+  display: block;
+  flex-direction: row;
+  min-height: 550px;
+  color: grey;
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  background-color: lightgrey;
+}
+
+.actor-post-tittle {
+  text-align: center;
+}
+
+.actor-post:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px;
+}
+
+.actor {
+  display: flex;
+  flex-wrap: wrap;
+}

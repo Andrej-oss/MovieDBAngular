@@ -1,0 +1,149 @@
+<div [class]="this.dataThemeService.data.value.darkTheme ? blackPage : whitePage">
+  <div *ngIf="!dataThemeService.data.value.isShowDetailLoading">
+    <div class="spinner-border" role="status" style="margin: 200px 0% 0% 50%">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="dataThemeService.data.value.isShowDetailLoading">
+    <div class="movie-detail">
+      <div *ngFor="let tvShow of tvShow$ | async">
+        <div class="movie-detail-background"
+             [ngStyle]="tvShow.backdrop_path
+      ? {'background-image': 'url(https://image.tmdb.org/t/p/w500' + tvShow.backdrop_path +')'}
+: {'background-image': 'url(../../../assets/movieDefault.jpg)'}">
+          <a *ngIf="!tvShow.poster_path">
+            <img src="../../../assets/kino2.jpg"
+                 style="width: 400px; height: 300px; border-radius: 10px; margin: 150px"/>
+          </a>
+          <a *ngIf="tvShow.poster_path">
+            <div class="movie-detail-poster">
+              <img src="https://image.tmdb.org/t/p/w300{{tvShow.poster_path}}"
+                   style="border-radius: 10px; margin: 150px"/>
+            </div>
+          </a>
+        </div>
+        <div class="movie-detail-content">
+          <h2>{{tvShow.name}}({{tvShow.first_air_date}})</h2>
+          <div class="movie-detail-content-block">
+            <div>
+              <mat-icon>stars</mat-icon>
+              {{tvShow.vote_average}}({{tvShow.vote_count}})
+            </div>
+            <br/>
+            <div>Popularity: {{tvShow.popularity}}</div>
+            <a>First in air: {{tvShow.first_air_date}}
+              Original language:
+              {{tvShow.original_language}}
+              <br/>
+              Last in air: {{tvShow.last_air_date}}
+              <div *ngFor="let genre of genres$ | async">
+                <div *ngFor="let movieGenre of tvShow.genres">
+                  <a *ngIf="movieGenre.id === genre.id">
+                    <li>{{genre.name}}</li>
+                  </a>
+                </div>
+              </div>
+              <br/>
+              <div>
+                {{tvShow.type}}
+              </div>
+              <div>
+                {{tvShow.episode_run_time}}
+              </div>
+              Created by:
+              <div style="display: flex; justify-content: flex-end">
+                <div *ngFor="let created of tvShow.created_by">
+                  {{created.episode_run_time}}
+                  {{created.first_air_date}}
+                  <a *ngIf="!created.profile_path">
+                    <img src="../../../assets/awaiting-profile.jpg" style="width: 100px; border-radius: 50%"/>
+                  </a>
+                  <a *ngIf="created.profile_path">
+                    <img src="https://image.tmdb.org/t/p/w200{{created.profile_path}}"
+                         style="border-radius: 50%; width: 100px"/>
+                  </a>
+                  <div>
+                    {{created.name}}
+                  </div>
+                </div>
+              </div>
+              <div>
+                Budget:
+              </div>
+              <div *ngIf="tvShow.in_production === true">
+                <div>In production</div>
+              </div>
+              <div *ngIf="tvShow.in_production === false">
+                <div>Not in production</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <table style="color: white">
+          <caption>Seasons</caption>
+          <tr>
+            <th>Number season</th>
+            <th>Season air date</th>
+            <th>Season name</th>
+            <th>Poster season</th>
+            <th>Poster Overview</th>
+            <th>Season Count</th>
+          </tr>
+          <tr *ngFor="let season of tvShow.seasons">
+            <td>{{season.season_number}}</td>
+            <td>{{season.air_date | date: 'MMMM d,y'}}</td>
+            <td>{{season.name}}</td>
+            <td>
+              <a *ngIf="!season.poster_path">
+                <img src="../../../assets/kino2.jpg" style="width: 100px"/>
+              </a>
+              <a *ngIf="season.poster_path"
+                 routerLink="/tv_show/seasons/{{tvShow.id}}/{{season.season_number}}"
+                 (click)="onGetSeason(tvShow.id, season.season_number)">
+                <img src="https://image.tmdb.org/t/p/w200{{season.poster_path}}">
+              </a>
+            </td>
+            <td>{{season.overview}}</td>
+            <td>{{season.episode_count}}</td>
+          </tr>
+        </table>
+        <div class="movie-detail-content-overview">
+          <h3>Overview</h3>
+          <br/>
+          {{tvShow.overview}}
+        </div>
+        <div (click)="showTrailers()" class="movie-detail-content-open">
+          <a *ngIf="!isOpen">Show Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <a *ngIf="isOpen">Hide Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <div *ngIf="isOpen === true">
+            <div *ngFor="let trailer of trailers$ | async">
+              <youtube-player [videoId]="trailer.key"></youtube-player>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="movie-detail-actors">
+      <h2>Actors</h2>
+      <div class="movie-detail-actor-content">
+        <app-actors *ngFor="let actor of actors$ | async" [actor]="actor"></app-actors>
+      </div>
+      <h2>Crew</h2>
+      <div class="movie-detail-actor-content">
+        <app-crew *ngFor="let person of crew$ | async" [person]="person"></app-crew>
+      </div>
+      <div (click)="showComments()" class="movie-detail-content-open-comment">
+        <a *ngIf="!isOpenComments" style="margin: 20px 20px 20px 40%"> Show Reviews</a>
+        <a *ngIf="!!isOpenComments" style="margin: 10px 10px 10px 40%"> Hide Reviews</a>
+      </div>
+      <div *ngIf="isOpenComments === true">
+        <app-comment *ngFor="let comment of comments$ | async" [comment]="comment"></app-comment>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,38 @@
+.actors-page{
+  min-height: 400px;
+  min-width: 900px ;
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 20px 10px 10px 60px;
+  background-color: white;
+}
+.actors-page-posts{
+  display: flex;
+  flex-direction: column;
+}
+.actors-page-posts-content{
+  display: flex;
+justify-content: flex-start;
+
+}
+.actors-page-sort{
+  margin: 120px 0px 0px 80px;
+}
+.actors-page-black{
+  min-height: 400px;
+  min-width: 900px;
+  display: flex;
+  justify-items: flex-start;
+  border-radius: 10px;
+  margin: 20px 10px 10px 60px;
+  background-color: black;
+  color: white;
+}
+.actors-page-posts-content-actor{
+
+}
+.actors-page-posts-content-search{
+margin: 5px 10px 100px 5px;
+}

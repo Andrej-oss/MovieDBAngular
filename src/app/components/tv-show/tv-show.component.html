@@ -1,0 +1,23 @@
+<div [class]="this.dataThemeService.data.value.darkTheme ? blackTheme : whiteTheme">
+  <div class="movie-page-sort">
+    <app-tv-show-sort></app-tv-show-sort>
+  </div>
+  <div *ngIf="!dataThemeService.data.value.isShowsLoading">
+    <div class="spinner-border" role="status" style="margin: 200px 0% 0% 400px">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="dataThemeService.data.value.isShowsLoading">
+    <div class="movie-page-posts">
+      <div class="movie-page-posts-content">
+        <app-tv-show-post *ngFor="let tvShow of tvShows$ | async" [tvShow]="tvShow" [genres]="genres$ | async">
+        </app-tv-show-post>
+      </div>
+      <div>
+        <app-paginator [sortOption]="selectOption$ | async"
+                       [activePage]="currentPage$ | async"></app-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,25 @@
+<form class="example-form" [formGroup]="searchForm"
+      (ngSubmit)="onSearchMovie(searchTv)">
+  <mat-button-toggle
+    routerLink="/tv_shows/{{searchTv.value}}/1"
+    (click)="onSearchMovie(searchTv)"
+    [disabled]="searchForm.invalid">Find
+  </mat-button-toggle>
+  <mat-form-field class="example-full-width">
+    <mat-label>Find TV Show</mat-label>
+    <input matInput placeholder="some tv show" [formControl]="searchTv">
+  </mat-form-field>
+</form>
+<mat-form-field appearance="fill">
+  <mat-label>Select an option</mat-label>
+  <mat-select disableRipple>
+    <div *ngFor="let option of selectOptions">
+      <mat-option value="{{option.selectOption}}"
+                  (click)="getShowsSort(option.selectOption)">
+        <a routerLink="/tv_shows/{{option.selectOption}}/{{currentPageTv$ | async}}">{{option.name}}</a></mat-option>
+    </div>
+  </mat-select>
+</mat-form-field>
+<router-outlet></router-outlet>
+
+

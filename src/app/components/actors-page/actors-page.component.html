@@ -1,0 +1,31 @@
+<div [class]="this.dataThemeService.data.value.darkTheme ? this.blackTheme : this.whiteTheme">
+  <div class="actors-page-posts">
+    <div class="actors-page-posts-content" style="display: flex">
+      <div class="actors-page-posts-content-search">
+        <form class="example-form" [formGroup]="searchForm">
+          <mat-form-field class="example-full-width">
+            <mat-label>Find actor</mat-label>
+            <input matInput placeholder="some movie" [formControl]="search">
+          </mat-form-field>
+          <a routerLink="/actors/{{searchForm.controls.search.value}}/1"
+             (click)="onSearchActor(search)">
+            <mat-button-toggle [disabled]="searchForm.invalid">Find</mat-button-toggle>
+          </a>
+        </form>
+      </div>
+      <div *ngIf="!dataThemeService.data.value.isActorLoading">
+        <div class="spinner-border" role="status" style="margin: 200px 0% 0% 400px">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div *ngIf="dataThemeService.data.value.isActorLoading">
+        <div class="actors-page-posts-content-actor">
+          <app-actor-post [actors]="actor$ | async"></app-actor-post>
+        </div>
+        <div class="">
+          <app-paginator [activePage]="currentPage$ | async"></app-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

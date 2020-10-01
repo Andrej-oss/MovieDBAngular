@@ -1,0 +1,29 @@
+<div class="movie-post" (click)="onGetShowDetail(tvShow.id)"
+     routerLink="{{tvShow.media_type === 'tv' ? '/actor/tv/'+ tvShow.id : tvShow.id}}">
+  <mat-icon matBadge="{{tvShow.popularity }}"
+            matBadgeColor="warn"
+            matBadgeSize="large" style="position: absolute"></mat-icon>
+  <a *ngIf="!tvShow.poster_path">
+    <img src="../../../assets/kino2.jpg" style="width: 200px"/>
+  </a>
+  <a *ngIf="tvShow.poster_path">
+    <img src="{{imgUrl}}"/>
+  </a>
+  <mat-chip-list aria-label="Fish selection">
+    <div *ngFor="let genre of genres">
+      <a *ngFor="let movieGenre of tvShow.genre_ids">
+      <span *ngIf="genre.id === movieGenre">
+        <mat-chip color="primary" matBadgeSize="small" style="position: center">{{genre.name}}</mat-chip>
+    </span>
+      </a>
+    </div>
+  </mat-chip-list>
+  <app-star-rating [vote]="tvShow.vote_average"></app-star-rating>
+  <div class="movie-post-tittle">
+    <h3>{{tvShow.name}}</h3>
+    <div>{{tvShow.first_air_date | date: 'MMMM d,y' }}</div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+

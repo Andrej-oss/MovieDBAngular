@@ -1,0 +1,44 @@
+.movie-page {
+  min-height: 400px;
+  min-width: 900px;
+  display: flex;
+  justify-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: white;
+}
+
+.movie-page-posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-page-posts-content {
+  min-height: 400px;
+  min-width: 600px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 20px 10px 10px 60px;
+}
+
+.movie-page-sort {
+  margin: 120px 0px 0px 80px;
+  max-width: 200px;
+}
+
+.movie-page-black {
+  min-height: 400px;
+  min-width: 900px;
+  display: flex;
+  justify-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: black;
+  color: white;
+}

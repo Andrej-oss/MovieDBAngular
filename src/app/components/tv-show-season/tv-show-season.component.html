@@ -1,0 +1,124 @@
+<div [class]="this.dataThemeService.data.value.darkTheme ? blackPage : whitePage">
+  <div *ngIf="!dataThemeService.data.value.isTvSeasonsLoading">
+    <div class="spinner-border" role="status" style="margin: 200px 0% 0% 50%">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="dataThemeService.data.value.isTvSeasonsLoading">
+    <div class="season-detail">
+      <div *ngFor="let season of season$ | async">
+        <div class="season-detail-background"
+             [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/w500' + season.poster_path +')'}">
+          <a *ngIf="!season.poster_path">
+            <img src="../../../assets/kino2.jpg"
+                 style="width: 400px; height: 300px; border-radius: 10px; margin: 150px"/>
+          </a>
+          <a *ngIf="season.poster_path">
+            <div class="season-detail-poster">
+              <img src="https://image.tmdb.org/t/p/w300{{season.poster_path}}"
+                   style="border-radius: 10px; margin: 150px"/>
+            </div>
+          </a>
+        </div>
+        <div class="season-detail-content">
+          <h2>{{season.name}}({{season.air_date}})</h2>
+          <div class="season-detail-content-block">
+            <a>Date: {{season.air_date}}
+              <br/>
+            </a>
+          </div>
+        </div>
+        <table style="color: white; max-width: 800px; margin-top: 200px">
+          <caption>Seasons</caption>
+          <tr>
+            <th>Number</th>
+            <th>Vote</th>
+            <th>Episode air date</th>
+            <th>Episode name</th>
+            <th>Poster episode</th>
+            <th>Overview</th>
+            <th style="width: 100px">Crew</th>
+            <th>Guests</th>
+          </tr>
+          <tr *ngFor="let episode of season.episodes">
+            <td>{{episode.episode_number}}</td>
+            <td>{{episode.vote_average}}</td>
+            <td>{{episode.air_date | date: 'MMMM d,y'}}</td>
+            <td>{{episode.name}}</td>
+            <td>
+              <a *ngIf="!episode.still_path"
+                 (click)="getEpisode(episode.show_id, season.season_number, episode.episode_number)"
+                 routerLink="{{episode.episode_number}}">
+                <img src="../../../assets/kino2.jpg" style="width: 100px"/>
+              </a>
+              <a *ngIf="episode.still_path"
+                 (click)="getEpisode(episode.show_id,season.season_number,episode.episode_number)"
+                 routerLink="{{episode.episode_number}}">
+                <img src="https://image.tmdb.org/t/p/w200{{episode.still_path}}">
+              </a>
+            </td>
+            <td style="min-width: 200px">{{episode.overview}}</td>
+            <a style="display: flex; flex-wrap: wrap; width: 100px;">
+              <td *ngFor="let person of episode.crew">
+                <a *ngIf="!person.profile_path" routerLink="/crew/{{person.id}}" (click)="getBiography(person.id)">
+                  <img src="../../../assets/awaiting-profile.jpg" style="width: 25px; border-radius: 50%"/>
+                </a>
+                <a *ngIf="person.profile_path" routerLink="/crew/{{person.id}}" (click)="getBiography(person.id)">
+                  <img src="https://image.tmdb.org/t/p/w200{{person.profile_path}}"
+                       style="border-radius: 50%; width: 25px"/>
+                </a>
+              </td>
+            </a>
+            <td>
+              <a style="display: flex; flex-wrap: wrap; width: 100px;">
+            <td *ngFor="let person of episode.guest_stars">
+              <a *ngIf="!person.profile_path" routerLink="/actor/{{person.id}}" (click)="getBiography(person.id)">
+                <img src="../../../assets/awaiting-profile.jpg" style="width: 25px; border-radius: 50%"/>
+              </a>
+              <a *ngIf="person.profile_path" routerLink="/actor/{{person.id}}" (click)="getBiography(person.id)">
+                <img src="https://image.tmdb.org/t/p/w200{{person.profile_path}}"
+                     style="border-radius: 50%; width: 25px"/>
+              </a>
+            </td>
+            </a>
+            </td>
+          </tr>
+        </table>
+        <div class="season-detail-content-overview">
+          <h3>Overview</h3>
+          <br/>
+          {{season.overview}}
+        </div>
+        <div (click)="showTrailers()" class="season-detail-content-open">
+          <a *ngIf="!isOpen">Show Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <a *ngIf="isOpen">Hide Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <div *ngIf="isOpen === true">
+            <div *ngFor="let trailer of trailers$ | async">
+              <youtube-player [videoId]="trailer.key"></youtube-player>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="season-detail-actors">
+      <h2>Actors</h2>
+      <div class="season-detail-actor-content">
+        <app-actors *ngFor="let actor of actors$ | async" [actor]="actor"></app-actors>
+      </div>
+      <h2>Crew</h2>
+      <div class="season-detail-actor-content">
+        <app-crew *ngFor="let person of crew$ | async" [person]="person"></app-crew>
+      </div>
+      <div (click)="showComments()" class="season-detail-content-open-comment">Show Reviews</div>
+      <div *ngIf="isOpenComments === true">
+        <app-comment *ngFor="let comment of comments$ | async" [comment]="comment"></app-comment>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+

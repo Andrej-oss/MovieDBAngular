@@ -1,0 +1,8 @@
+<a style="position: center" *ngFor="let star of smallRating">
+  <a *ngIf="star.id <= vote">
+    <mat-icon style="color: gold">grade</mat-icon>
+  </a>
+  <a *ngIf="star.id > vote">
+    <mat-icon style="color: darkgray">grade</mat-icon>
+  </a>
+</a>

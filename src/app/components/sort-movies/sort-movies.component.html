@@ -1,0 +1,80 @@
+<form class="example-form" [formGroup]="searchForm">
+  <mat-button-toggle
+    routerLink="/movies/{{search.value}}/1"
+    (click)="onSearchMovie(search)"
+    [disabled]="searchForm.invalid">Find
+  </mat-button-toggle>
+  <mat-form-field class="example-full-width">
+    <mat-label>Find movie</mat-label>
+    <input matInput placeholder="some movie" [formControl]="search">
+  </mat-form-field>
+</form>
+<mat-form-field appearance="fill" style="margin-top: 50px">
+  <mat-label>Select an option</mat-label>
+  <mat-select disableRipple>
+    <div *ngFor="let option of selectOptions">
+      <mat-option value="{{option.selectOption}}"
+                  (click)="getMoviesSort(option.selectOption)">
+        <a routerLink="/movies/{{option.selectOption}}/{{currentPage$ | async}}">{{option.name}}</a></mat-option>
+    </div>
+  </mat-select>
+</mat-form-field>
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Sort Movies
+      </mat-panel-title>
+      <mat-panel-description>
+        Search
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form class="example-form" [formGroup]="multiSearchForm">
+      <div>Sorting movies:
+        <div *ngFor="let sort of selectOptions">
+          <input type="radio" formControlName="sort" value="{{sort.selectOption}}">{{sort.name}}
+        </div>
+      </div>
+      <br/>
+      <div>Country movie:
+        <input type="radio" formControlName="country" value="Ru">Russia
+        <input type="radio" formControlName="country" value="En">England
+        <input type="radio" formControlName="country" value="De">Germany
+        <input type="radio" formControlName="country" value="Pl">Poland
+        <input type="radio" formControlName="country" value="Us">USA
+        <input type="radio" formControlName="country" value="Fr">France
+        <input type="radio" formControlName="country" value="Es">Spain
+        <input type="radio" formControlName="country" value="">All
+      </div>
+      <br/>
+      <div>Language:
+        <input type="radio" formControlName="lang" value="ru-RU">Ru
+        <input type="radio" formControlName="lang" value="en-US">US
+        <input type="radio" formControlName="lang" value="de-DE">DE
+        <input type="radio" formControlName="lang" value="pl-PL">PL
+        <input type="radio" formControlName="lang" value="es-Es">ES
+        <input type="radio" formControlName="lang" value="fr-Fr">FR
+      </div>
+      <input type="date" formControlName="date">
+      <label for="orders">Vote Average</label>
+      <select formControlName="vote" id="orders">
+        <option *ngFor="let order of voteArray; let i = index" [value]="i+1">
+          {{i + 1}}
+        </option>
+      </select>
+      <br/>
+      <div>Vote count:
+        <input type="text" [formControl]="voteCount">
+        <div *ngIf="multiSearchForm.controls.voteCount.value > 27000">Must be lower then 27000
+        </div>
+      </div>
+      <div *ngIf="multiSearchForm.controls.voteCount.invalid"> Don't be a stupid where did you see count not a number
+      </div>
+      <div *ngIf="multiSearchForm.controls.voteCount.value <= 27000">Must be lower then 27000
+        <button (click)="onMiltySearchMovie(multiSearchForm)" [disabled]="multiSearchForm.invalid">Find</button>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<router-outlet></router-outlet>
+

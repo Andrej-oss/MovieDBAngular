@@ -1,0 +1,83 @@
+<div [class]="this.dataThemeService.data.value.darkTheme ? blackTheme : whiteTheme">
+  <div *ngFor="let actor of actor$ | async">
+    <div class="actor-list-biography">
+      <a *ngIf="!actor.profile_path">
+        <img src="../../../assets/awaiting-profile.jpg" style="width: 200px; border-radius: 5%"/>
+      </a>
+      <a *ngIf="actor.profile_path">
+        <img src="https://image.tmdb.org/t/p/w200{{actor.profile_path}}"
+             style="width: 200px; height: 300px; border-radius: 20px"/>
+      </a>
+      <div class="actor-list-biography-content">
+        <h1>{{actor.name}}</h1>
+        <div class="actor-list-biography-content-date">({{actor.birthday | date: 'dd-MM-yyyy'}} - {{actor.deathday}})
+        </div>
+        <br/>
+        <div>Born: {{actor.place_of_birth}}</div>
+        <br/>
+        <br/>
+        <div>Home page: {{actor.homepage}}</div>
+        <br/>
+        <br/>
+        <div>Department: {{actor.known_for_department}}</div>
+        <br/>
+        <div>Biography:</div>
+        <div className="actor-list-biography-content-biography">{{actor.biography}}</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!dataThemeService.data.value.isActorsMoviesLoading">
+    <div class="spinner-border" role="status" style="margin: 200px 0% 0% 50%">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="dataThemeService.data.value.isActorsMoviesLoading">
+    <div class="mat-elevation-z8" style="margin: 40px 10px 10px 50px; background-color: black">
+      <table mat-table [dataSource]="movies$ | async" class="mat-elevation-z8"
+             [style]="this.dataThemeService.data.value.darkTheme ? black : white">
+        <ng-container matColumnDef="position" style="margin: 10px 10px 10px 10px">
+          <th mat-header-cell *matHeaderCellDef
+              [style]="this.dataThemeService.data.value.darkTheme ? blackColor : whiteColor"> No.
+          </th>
+          <td mat-cell *matCellDef="let i = index"
+              [style]="this.dataThemeService.data.value.darkTheme ? blackColor : whiteColor"> {{i + 1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name" style="margin: 10px 10px 10px 10px">
+          <th mat-header-cell *matHeaderCellDef
+              [style]="this.dataThemeService.data.value.darkTheme ? blackColor : whiteColor"> Year
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.release_date || element.first_air_date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="weight" style="margin: 10px 10px 10px 10px">
+          <th mat-header-cell *matHeaderCellDef> Poster</th>
+          <td mat-cell *matCellDef="let element">
+            <a *ngIf="element.media_type === 'movie'">
+              <app-movie-post [movie]="element"></app-movie-post>
+            </a>
+            <a *ngIf="element.media_type === 'tv'">
+              <app-tv-show-post [tvShow]="element"></app-tv-show-post>
+            </a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="overview" style="margin: 10px 10px 10px 10px">
+          <th mat-header-cell *matHeaderCellDef
+              [style]="dataThemeService.data.value.darkTheme ? blackColor : whiteColor"> Overview
+          </th>
+          <td mat-cell *matCellDef="let element"
+              [style]="dataThemeService.data.value.darkTheme ? blackColor : whiteColor">{{element.overview}}</td>
+        </ng-container>
+        <ng-container matColumnDef="character" style="margin: 10px 10px 10px 10px">
+          <th mat-header-cell *matHeaderCellDef
+              [style]="this.dataThemeService.data.value.darkTheme ? blackColor : whiteColor"> Character
+          </th>
+          <td mat-cell *matCellDef="let element"
+              [style]="dataThemeService.data.value.darkTheme ? blackColor : whiteColor"> {{element.character}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

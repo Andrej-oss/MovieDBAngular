@@ -1,0 +1,112 @@
+<div [class]="dataThemeService.data.value.darkTheme ? blackPage : whitePage">
+  <div *ngIf="!dataThemeService.data.value.isMovieDetailsLoading">
+    <div class="spinner-border" role="status" style="margin: 200px 0% 0% 50%">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="dataThemeService.data.value.isMovieDetailsLoading">
+    <div class="movie-detail">
+      <div *ngFor="let movie of movie$ | async">
+
+        <div class="movie-detail-background"
+             [ngStyle]="movie.backdrop_path
+      ? {'background-image': 'url(https://image.tmdb.org/t/p/w500' + movie.backdrop_path +')'}
+: {'background-image': 'url(../../../assets/movieDefault.jpg)'}">
+          <div class="movie-detail-poster">
+            <div class="movie-detail-content-open-company">
+              <div *ngFor="let company of movie.production_companies">
+                <a *ngIf="company.logo_path">
+                  <img src="https://image.tmdb.org/t/p/w200{{company.logo_path}}" style="width: 100px"/>
+                </a>
+              </div>
+            </div>
+            <a *ngIf="!movie.poster_path">
+              <img src="../../../assets/kino2.jpg"
+                   style="width: 400px; height: 300px; border-radius: 10px; margin: 150px"/>
+            </a>
+            <a *ngIf="movie.poster_path">
+              <img src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"
+                   style="border-radius: 10px; margin: 100px"/>
+            </a>
+          </div>
+        </div>
+        <div class="movie-detail-content">
+          <h2>{{movie.title}}({{movie.release_date}})</h2>
+          <div class="movie-detail-content-block">
+            <div>
+              <mat-icon>stars</mat-icon>
+              {{movie.vote_average}}({{movie.vote_count}})
+            </div>
+            <br/>
+            <div>Popularity: {{movie.popularity}}</div>
+            <a>{{movie.release_date}} Original language:
+              {{movie.original_language}}
+              <br/>
+              <div *ngFor="let genre of genres$ | async">
+                <div *ngFor="let movieGenre of movie.genres">
+                  <a *ngIf="movieGenre.id === genre.id">
+                    <li>{{genre.name}}</li>
+                  </a>
+                </div>
+              </div>
+              <br/>
+              <div>
+                Budget: {{movie.budget}}
+              </div>
+              <div *ngIf="movie.adult === true">
+                <div>For adult</div>
+              </div>
+              <div *ngIf="movie.adult === false">
+                <div>Not For Adult</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="movie-detail-content-overview">
+          <h3>Overview</h3>
+          <br/>
+          {{movie.overview}}
+        </div>
+        <div (click)="showTrailers()" class="movie-detail-content-open">
+          <a *ngIf="!isOpen">Show Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <a *ngIf="isOpen">Hide Trailers
+            <mat-icon>video_library</mat-icon>
+          </a>
+          <div *ngIf="isOpen === true">
+            <div *ngFor="let trailer of trailers$ | async">
+              <a *ngIf="trailer.size">
+                <youtube-player [videoId]="trailer.key"></youtube-player>
+              </a>
+              <a *ngIf="!trailer.size">
+                No Trailers Yet!!!
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [class]="this.dataThemeService.data.value.darkTheme ? blackTheme : whiteTheme">
+      <h2>Actors</h2>
+      <div class="movie-detail-actor-content">
+        <app-actors *ngFor="let actor of actors$ | async" [actor]="actor"></app-actors>
+      </div>
+      <h2>Crew</h2>
+      <div class="movie-detail-actor-content">
+        <app-crew *ngFor="let person of crew$ | async" [person]="person"></app-crew>
+      </div>
+      <div (click)="showComments()" class="movie-detail-content-open-comment">
+        <a *ngIf="!isOpenComments" style="margin: 20px 20px 20px 40%"> Show Reviews
+          <mat-icon>comment_bank</mat-icon>
+        </a>
+        <a *ngIf="!!isOpenComments" style="margin: 10px 10px 10px 40%"> Hide Reviews
+          <mat-icon>comment_bank</mat-icon>
+        </a>
+      </div>
+      <div *ngIf="isOpenComments === true">
+        <app-comment *ngFor="let comment of comments$ | async" [comment]="comment"></app-comment>
+      </div>
+    </div>
+  </div>
+</div>

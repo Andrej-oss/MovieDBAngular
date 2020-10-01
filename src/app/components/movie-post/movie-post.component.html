@@ -1,0 +1,28 @@
+<div class="movie-post" (click)="onGetDetailsMovie(movie.id)"
+     routerLink="{{movie.id}}">
+  <mat-icon matBadge="{{movie.popularity }}"
+            matBadgeColor="warn"
+            matBadgeSize="large" style="position: absolute"></mat-icon>
+  <a *ngIf="!movie.poster_path">
+    <img src="../../../assets/kino2.jpg" style="width: 200px"/>
+  </a>
+  <a *ngIf="movie.poster_path">
+    <img src="{{imgUrl}}"/>
+  </a>
+  <mat-chip-list aria-label="Fish selection">
+    <div *ngFor="let genre of genres$ | async">
+      <a *ngFor="let movieGenre of movie.genre_ids">
+      <span *ngIf="genre.id === movieGenre">
+        <mat-chip color="primary" matBadgeSize="small" style="position: center">{{genre.name}}</mat-chip>
+    </span>
+      </a>
+    </div>
+  </mat-chip-list>
+  <app-star-rating [vote]="movie.vote_average"></app-star-rating>
+  <div class="movie-post-tittle">
+    <h3>{{movie.title}}</h3>
+    <div>{{movie.release_date | date: 'MMMM d,y' }}</div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+

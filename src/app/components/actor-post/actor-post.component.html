@@ -1,0 +1,48 @@
+<div class="actor">
+  <div class="actor-post" *ngFor="let actor of actors">
+    <div (click)="onGetActor(actor.id)" routerLink="/actor/{{actor.id}}">
+      <mat-icon matBadge="{{actor.popularity }}"
+                matBadgeColor="warn"
+                matBadgeSize="large" style="position: absolute"></mat-icon>
+      <a *ngIf="!actor.profile_path">
+        <img src="../../../assets/awaiting-profile.jpg" style="width: 200px"/>
+      </a>
+      <a *ngIf="actor.profile_path">
+        <img src="https://image.tmdb.org/t/p/w200{{actor.profile_path}}" width="250px"/>
+      </a>
+      <div class="actor-post-tittle">
+        <h3>{{actor.name}}</h3>
+      </div>
+      <div style="display: flex; flex-wrap: wrap">
+        <div *ngFor="let movie of actor.known_for">
+          <div *ngIf="movie.media_type === 'movie'">
+            <div (click)="onGetMovieActor(movie.id)" routerLink="/actor/{{actor.id}}/{{movie.id}}">
+              <a *ngIf="!movie.poster_path">
+                <img src="../../../assets/kino2.jpg" style="width: 75px; margin: 3px 3px 3px 3px">
+              </a>
+              <a *ngIf="movie.poster_path">
+                <img src="https://image.tmdb.org/t/p/w400{{movie.poster_path}}"
+                     style="width: 75px; margin: 3px 3px 3px 3px">
+              </a>
+            </div>
+          </div>
+          <div *ngIf="movie.media_type === 'tv'">
+            <div (click)="onGetMovieActor(movie.id)"
+                 routerLink="/tv_shows/{{currentPage$ | async}}/{{actor.id}}/{{movie.id}}">
+              <a *ngIf="!movie.poster_path">
+                <img src="./src/assets/kino2.jpg" style="width: 75px; margin: 3px 3px 3px 3px">
+              </a>
+              <a *ngIf="movie.poster_path">
+                <img src="https://image.tmdb.org/t/p/w400{{movie.poster_path}}"
+                     style="width: 75px; margin: 3px 3px 3px 3px">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+

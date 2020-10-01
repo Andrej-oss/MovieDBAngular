@@ -1,0 +1,98 @@
+.movies-project-black {
+  min-height: 40px;
+  min-width: 900px;
+  display: flex;
+  justify-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  color: white;
+  background-color: black;
+}
+
+.movies-project-white {
+
+  min-height: 40px;
+  min-width: 900px;
+  display: flex;
+  justify-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
+  margin: 10px 10px 10px 80px;
+  background-color: white;
+}
+
+.movies-project-movie-page {
+  color: gray;
+  font-family: "Sitka Heading";
+  font-size: medium;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+}
+
+.movies-project-movie-page:hover {
+  color: black;
+  background-color: lightgray;
+}
+
+.movies-project-movie-active-page {
+  color: black;
+  font-family: "Sitka Heading";
+  font-size: medium;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  background-color: lightgray;
+  border-bottom: black solid 2px;
+}
+
+.movies-project-actor-page {
+  color: gray;
+  font-family: "Sitka Heading";
+  font-size: medium;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+}
+
+.movies-project-actor-page:hover {
+  color: black;
+  background-color: lightgray;
+}
+
+.movies-project-tv-page {
+  color: gray;
+  font-family: "Sitka Heading";
+  font-size: medium;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+}
+
+.movies-project-tv-page:hover {
+  color: black;
+  background-color: lightgray;
+}
+
+.movies-project-actor-active-page {
+  color: black;
+  font-family: "Sitka Heading";
+  font-size: medium;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  background-color: lightgray;
+  border-bottom: black solid 2px;
+}
+
+.movies-project-tv-active-page {
+  color: black;
+  font-family: "Sitka Heading";
+  font-size: medium;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  background-color: lightgray;
+  border-bottom: black solid 2px;
+}

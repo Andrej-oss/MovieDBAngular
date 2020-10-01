@@ -1,0 +1,32 @@
+<div [className]="this.dataThemeService.data.value.darkTheme ? darkClass : whiteClass">
+
+  <a routerLink="movies/popularity.desc/1"
+     (click)="getMoviePaginator()"
+     class="{{!isActiveMovie ? 'movies-project-movie-page' : 'movies-project-movie-active-page'}}"
+     (click)="getMovieClass()">
+    <br/>
+    Movies
+  </a>
+  <a routerLink="tv_shows/popularity.desc/1"
+     (click)="getTvShowPaginator()"
+     class="{{!isActiveTv ? 'movies-project-tv-page' : 'movies-project-tv-active-page'}}" (click)="getTvClass()">
+    <br/>
+    Tv Show
+  </a>
+  <a routerLink="actors/1"
+     (click)="getActorPaginator()"
+     class="{{!isActiveActor ? 'movies-project-actor-page' : 'movies-project-actor-active-page'}}"
+     (click)="getActorClass()">
+    <br/>
+    Actors
+  </a>
+  <mat-slide-toggle color="primary" (click)="onChangeTheme()">
+    <a style="text-decoration: none" *ngIf="!this.dataThemeService.data.value.darkTheme">Go to Dark</a>
+    <a style="text-decoration: none" *ngIf="this.dataThemeService.data.value.darkTheme">Go to White</a>
+    <mat-icon>brightness_2</mat-icon>
+  </mat-slide-toggle>
+</div>
+<a *ngIf="moviesTop && topShows && actors">
+  <app-home [topMovies]="moviesTop.results" [topShows]="topShows.results" [actors]="actors.results"></app-home>
+</a>
+<router-outlet></router-outlet>

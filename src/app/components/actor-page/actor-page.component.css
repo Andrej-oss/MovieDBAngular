@@ -1,0 +1,43 @@
+.actor-list {
+  width: 1200px;
+  min-height: 900px;
+  margin: 20px 10px 10px 100px;
+  background-color: white;
+  box-shadow: 0 0 5px;
+}
+
+.actor-list-biography {
+  display: flex;
+  justify-content: start;
+}
+
+.actor-list-biography-img {
+  border-radius: 50px;
+  margin: 10px 10px 10px 10px;
+  position: absolute;
+}
+
+.actor-list-biography-img-content {
+  margin: 40px 40px 40px 300px;
+}
+
+.actor-list-biography-img-content-biography {
+  margin: 200px 10px 10px 10px;
+}
+
+.actor-list-biography-img-content-biography-date {
+  text-align: center;
+  margin: 10px 10px 10px 10px;
+}
+
+.actor-list-biography-content {
+  margin: 10px 10px 20px 40px;
+}
+
+.actor-list-black {
+  width: 1200px;
+  min-height: 900px;
+  margin: 20px 10px 10px 100px;
+  background-color: black;
+  color: white;
+}
