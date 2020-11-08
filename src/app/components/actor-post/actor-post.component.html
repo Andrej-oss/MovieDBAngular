@@ -30,7 +30,7 @@
             <div (click)="onGetMovieActor(movie.id)"
                  routerLink="/tv_shows/{{currentPage$ | async}}/{{actor.id}}/{{movie.id}}">
               <a *ngIf="!movie.poster_path">
-                <img src="./src/assets/kino2.jpg" style="width: 75px; margin: 3px 3px 3px 3px">
+                <img src="./src/assets/kino2.jpg" style="width: 75px; margin: 3px 3px 2px 2px">
               </a>
               <a *ngIf="movie.poster_path">
                 <img src="https://image.tmdb.org/t/p/w400{{movie.poster_path}}"

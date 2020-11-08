@@ -81,6 +81,7 @@ export class ActionStoreService {
         debugger;
         this.dataThemeService.data.value.lastPage = data.total_pages;
         this.dataThemeService.data.value.isMovieLoading = true;
+        this.dataThemeService.data.value.language = '';
         return this.store.dispatch(new MoviesLoaded([data, selectOption]));
       });
   }
@@ -165,6 +166,7 @@ export class ActionStoreService {
         this.dataThemeService.data.value.year = year;
         this.dataThemeService.data.value.vote = vote;
         this.dataThemeService.data.value.count = count;
+        this.dataThemeService.data.value.lastPage = data.total_pages;
         return this.store.dispatch(new MoviesMultiSearchLoaded([data, sort]));
       });
   }

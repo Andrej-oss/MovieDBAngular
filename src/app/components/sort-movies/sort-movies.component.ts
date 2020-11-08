@@ -56,6 +56,7 @@ export class SortMoviesComponent implements OnInit, OnChanges {
   getMoviesSort(selectOption: string): void {
     console.log(selectOption);
     this.dataThemeService.data.value.isMovieLoading = false;
+    this.dataThemeService.data.value.language = '';
     this.actionStoreService.getMovies(selectOption, 1);
   }
 

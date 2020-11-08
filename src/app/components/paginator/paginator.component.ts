@@ -38,15 +38,15 @@ export class PaginatorComponent implements OnInit, OnChanges {
     debugger;
     this.key = this.dataThemeService.data.value.lastPage - (this.paginator[0].id - 1);
     console.log(this.paginator);
-    /* if (this.activePage < 10){
+     if (this.activePage < 10){
        this.paginator = [{id: 1}, { id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}, {id: 9}, {id: 10}];
-     }*/
+     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     debugger;
     console.log(changes);
-    /* if (changes.sortOption.currentValue !== changes.sortOption.previousValue){
+     /*if (changes.sortOption.currentValue !== changes.sortOption.previousValue){
        this.paginator =  [{id: 1}, { id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}, {id: 9}, {id: 10}];
        console.log(pages);
      }*/
